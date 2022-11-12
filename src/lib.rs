@@ -12,8 +12,6 @@ pub trait Destination {
 }
 
 /// PlaybackErr is returned when a Destination fails to play a Sample
-///
-/// This is a simple wrapper around a string that implements Display, Debug, and Error
 #[derive(Debug)]
 pub struct PlaybackErr {
     pub msg: String,
