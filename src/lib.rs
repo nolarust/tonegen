@@ -19,6 +19,7 @@ pub struct PlaybackErr {
 
 impl PlaybackErr {
     pub fn new(message: &str) -> Self {
+        unr
         Self {
             msg: message.to_string(),
         }
