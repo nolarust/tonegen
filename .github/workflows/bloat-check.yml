@@ -1,0 +1,32 @@
+# run on any PRs and main branch changes
+# NOTE: Currently disabled since these actions have some issues.
+on: []
+  # pull_request:
+  # push:
+  #   branches:
+  #     - main
+
+name: Package dependency bloat check
+
+jobs:
+  cargo_bloat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      
+      # NOTE: CURRENTLY REQUIRES NIGHTLY RUST BUILD
+      - name: Find unused package dependencies (cargo udeps)
+        uses: aig787/cargo-udeps-action@v1
+        with:
+          version: 'latest'
+          args: '--all-targets'
+
+      # NOTE: CURRENTLY GET 404 WHEN PULLING PRIOR BUILD FOR COMPARISON
+      - name: Check binary size growth by package (cargo bloat)
+        uses: orf/cargo-bloat-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
