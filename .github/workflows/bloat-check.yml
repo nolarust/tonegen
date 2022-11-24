@@ -1,4 +1,4 @@
-on: # rebuild any PRs and main branch changes
+on: # run on any PRs and main branch changes
   pull_request:
   push:
     branches:
@@ -15,7 +15,15 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+      # TODO: ENABLE. DISABLED FOR NOW, REQUIRES NIGHTLY RUST BUILD
+      # - name: Run cargo udeps
+      #   description: Finds unused package dependencies
+      #   uses: aig787/cargo-udeps-action@v1
+      #   with:
+      #     version: 'latest'
+      #     args: '--all-targets'
       - name: Run cargo bloat
+        description: Checks binary size growth by package
         uses: orf/cargo-bloat-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
