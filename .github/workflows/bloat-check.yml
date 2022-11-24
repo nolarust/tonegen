@@ -4,7 +4,7 @@ on: # run on any PRs and main branch changes
     branches:
       - main
 
-name: Package bloat check
+name: Package dependency bloat check
 
 jobs:
   cargo_bloat:
@@ -15,15 +15,15 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+      
       # TODO: ENABLE. DISABLED FOR NOW, REQUIRES NIGHTLY RUST BUILD
-      # - name: Run cargo udeps
-      #   description: Finds unused package dependencies
+      # - name: Find unused package dependencies (cargo udeps)
       #   uses: aig787/cargo-udeps-action@v1
       #   with:
       #     version: 'latest'
       #     args: '--all-targets'
-      - name: Run cargo bloat
-        description: Checks binary size growth by package
+
+      - name: Check binary size growth by package (cargo bloat)
         uses: orf/cargo-bloat-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
