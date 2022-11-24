@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "rust-lang.rust-analyzer",
+        "serayuzgur.crates",
+        "bungcip.better-toml"
+    ]
+}
